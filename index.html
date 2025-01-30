@@ -9,11 +9,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 100vh;
+            height: 60vh;
             margin: 0;
             padding: 20px;
             background-color: #f0f0f0;
             position: relative;
+            background-color: orange;
         }
         .button {
             padding: 15px 30px;
@@ -39,7 +40,7 @@
         .button::after {
             content: '';
             position: absolute;
-            top: 50%;
+            top: 40%;
             left: 50%;
             width: 300%;
             height: 300%;
@@ -60,10 +61,14 @@
             bottom: -200px;
             left: 50%;
             transform: translateX(-50%);
-            transition: bottom 0.5s ease-in-out;
+            transition: bottom 0.5s ease-in-out, opacity 0.5s;
+            opacity: 0;
+            visibility: hidden;
         }
         .show {
             bottom: 50px !important;
+            opacity: 1 !important;
+            visibility: visible !important;
         }
     </style>
 </head>
@@ -91,7 +96,9 @@
         function showGif(gifId) {
             let gif = document.getElementById(gifId);
             gif.classList.add('show');
-            setTimeout(() => gif.classList.remove('show'), 2000);
+            setTimeout(() => {
+                gif.classList.remove('show');
+            }, 2000);
         }
     </script>
 </body>
