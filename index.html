@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yes or No</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+            position: relative;
+        }
+        .button {
+            padding: 15px 30px;
+            font-size: 20px;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        .yes {
+            background-color: green;
+        }
+        .no {
+            background-color: red;
+        }
+        .button:active {
+            transform: scale(1.1);
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+        }
+        .button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: width 0.4s, height 0.4s, opacity 0.4s;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+        }
+        .button:active::after {
+            width: 0;
+            height: 0;
+            opacity: 1;
+            transition: 0s;
+        }
+        .gif-container {
+            position: absolute;
+            bottom: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: bottom 0.5s ease-in-out;
+        }
+        .show {
+            bottom: 50px !important;
+        }
+    </style>
+</head>
+<body>
+    <button class="button yes" onclick="playSound('yes')">🔥 YES 🔥</button>
+    <button class="button no" onclick="playSound('no')">💥 NO 💥</button>
+    
+    <audio id="yesSound" src="https://www.soundjay.com/buttons/sounds/button-2.mp3"></audio>
+    <audio id="noSound" src="https://www.soundjay.com/buttons/sounds/button-10.mp3"></audio>
+    
+    <img id="yesGif" class="gif-container" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExejAxd2luN29zbHN4YWFzbHEzbDdwajFyaHB3ZmhhZnJ2NzN4OW9kcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7abKhOpu0NwenH3O/giphy.gif" width="200">
+    <img id="noGif" class="gif-container" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExb2Q2bXB0b2V0MmpnbWZ3bHMzNW53ejhjMnRwOTc0MzlpaGdsanU4eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/DqhwoR9RHm3EA/giphy.gif" width="200">
+    
+    <script>
+        function playSound(type) {
+            if (type === 'yes') {
+                document.getElementById('yesSound').play();
+                showGif('yesGif');
+            } else {
+                document.getElementById('noSound').play();
+                showGif('noGif');
+            }
+        }
+        
+        function showGif(gifId) {
+            let gif = document.getElementById(gifId);
+            gif.classList.add('show');
+            setTimeout(() => gif.classList.remove('show'), 2000);
+        }
+    </script>
+</body>
+</html>
